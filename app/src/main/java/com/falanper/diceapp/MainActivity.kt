@@ -4,22 +4,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import com.falanper.diceapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var diceOneImg : ImageView
-    lateinit var diceTwoImg : ImageView
+    lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        diceOneImg = findViewById(R.id.image_view_dice_one)
-        diceTwoImg = findViewById(R.id.image_view_dice_two)
-
-        val rollButton = findViewById<Button>(R.id.btn_roll_dice)
-
-        rollButton.setOnClickListener {
+       binding.btnRollDice.setOnClickListener {
             rollDice()
         }
     }
@@ -39,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             else -> R.drawable.dice_empty
         }
 
-        diceOneImg.setImageResource(imageOne)
+        binding.imageViewDiceOne.setImageResource(imageOne)
 
         val imageTwo = when (randomNumberSecond) {
             1 -> R.drawable.dice1
@@ -51,6 +48,6 @@ class MainActivity : AppCompatActivity() {
             else -> R.drawable.dice_empty
         }
 
-        diceTwoImg.setImageResource(imageTwo)
+        binding.imageViewDiceTwo.setImageResource(imageTwo)
     }
 }
